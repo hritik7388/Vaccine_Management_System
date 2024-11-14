@@ -1,0 +1,48 @@
+{
+  "name": "vaccine_management_system",
+  "version": "1.0.0",
+  "description": "Create a proper vaccine management system for user with admin pannel",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hritik7388/Vaccine_Management_System.git"
+  },
+  "author": "Hritik Bhadauria",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hritik7388/Vaccine_Management_System/issues"
+  },
+  "homepage": "https://github.com/hritik7388/Vaccine_Management_System#readme",
+  "dependencies": {
+    "base64-to-image": "^1.0.2",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
+    "bip32": "^4.0.0",
+    "bip39": "^3.0.4",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "joi": "^17.13.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.2",
+    "mongoose-aggregate-paginate-v2": "^1.1.0",
+    "mongoose-paginate": "^5.0.3",
+    "mongoose-paginate-v2": "^1.7.4",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.7",
+    "nodemon": "^3.0.1",
+    "razorpay": "^2.9.2",
+    "socket.io": "^4.7.2",
+    "speakeasy": "^2.0.0",
+    "websocket": "^1.0.35"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
+  }
+}
