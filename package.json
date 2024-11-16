@@ -37,6 +37,8 @@
     "razorpay": "^2.9.2",
     "socket.io": "^4.7.2",
     "speakeasy": "^2.0.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "websocket": "^1.0.35"
   },
   "devDependencies": {

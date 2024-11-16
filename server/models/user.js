@@ -1,4 +1,6 @@
-import Mongoose, {Schema} from "mongoose";
+import Mongoose, {
+    Schema
+} from "mongoose";
 import mongoosePaginate from "mongoose-paginate";
 import mongooseAggregatePaginate from "mongoose-aggregate-paginate";
 import status from "../enum/status";
@@ -29,6 +31,10 @@ const userModel = new Schema({
         password: {
             type: String,
             required: true
+        },
+        confirmPassword: {
+            type: String,
+            
         },
         email: {
             type: String,
@@ -71,7 +77,7 @@ const userModel = new Schema({
             required: true,
             default: false
         },
-        expTime: {
+        otpExpTime: {
             type: Number,
             default: null
         },
@@ -134,7 +140,7 @@ module.exports = Mongoose.model("user", userModel);
                 email: "choreohritik52@mailinator.com",
                 dateOfBirth: "04/09/1996",
                 gender: "Male",
-                password: bcrypt.hashSync("Mobiloitte@1"),
+                password: bcrypt.hashSync("Mobiloitte@1"), 
                 OTPVerification: "true",
                 address: "Okhala, Delhi, India",
                 location: {
