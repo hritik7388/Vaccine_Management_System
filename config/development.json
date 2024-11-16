@@ -1,0 +1,37 @@
+{
+  "port": 1987,
+  "hostAddress": "localhost:1987",
+  "databaseHost": "localhost",
+  "databasePort": "27017",
+  "databaseName": "Vaccine_Management_System",
+  "jwtsecret": "nodejwt",
+  "jwtresetsecret": "nodejwt",
+  "jwtOptions": {
+    "expiresIn": "30d"
+  },
+  "nodemailer": {
+    "service": "gmail",
+    "email": "mobiloitte.node@gmail.com",
+    "password": "wdbakhorlxmmqrhg"
+  },
+ 
+  "swaggerDefinition": {
+    "info": {
+      "title": "Vaccine_Management_System(Hritik Bhadauria)",
+      "version": "2.0",
+      "description": "Vaccine_Management_System"
+    },
+   
+
+    "basePath": "/api/v1",
+    "securityDefinitions": {
+      "tokenauth": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  }
+
+ 
+}
