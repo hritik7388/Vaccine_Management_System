@@ -34,7 +34,7 @@ const userModel = new Schema({
         },
         confirmPassword: {
             type: String,
-            
+
         },
         email: {
             type: String,
@@ -83,13 +83,13 @@ const userModel = new Schema({
         },
         userType: {
             type: String,
-            enum: ["ADMIN", "SUBADMIN", "USER"],
-            default: "USER",
+            enum: [userType.ADMIN, userType.USER, userType.SUB_ADMIN],
+            default: userType.USER,
         },
         status: {
             type: String,
-            enum: ["ACTIVE", "BLOCKED", "DELETED", ],
-            default: "ACTIVE",
+            enum: [status.ACTIVE, status.BLOCK, status.DELETE],
+            default: status.ACTIVE,
         },
         address: {
             type: String,
@@ -140,9 +140,10 @@ module.exports = Mongoose.model("user", userModel);
                 email: "choreohritik52@mailinator.com",
                 dateOfBirth: "04/09/1996",
                 gender: "Male",
-                password: bcrypt.hashSync("Mobiloitte@1"), 
+                password: bcrypt.hashSync("Mobiloitte@1"),
                 OTPVerification: "true",
                 address: "Okhala, Delhi, India",
+                permissionGrant: true,
                 location: {
                     type: "Point",
                     coordinates: [79.5051358, 27.1439001] // Example: longitude and latitude for Delhi

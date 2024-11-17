@@ -48,6 +48,7 @@ module.exports = {
 	PROFILE_UPDATED: "Profile updated successfully.",
 	FEED_UPDATED: "Fees updated successfully.",
 	USER_EXISTS: "This user already exists.",
+	CENTER_EXISTS: "This center already exists.",
 	MOBILE_EXIST: "This mobile number already exists.",
 	ALREADY_SENT: "Friend Request already Sent",
 	NUMBER_NOT_FOUND: "Number not found",

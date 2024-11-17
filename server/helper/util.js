@@ -3,19 +3,7 @@ import jwt from "jsonwebtoken";
 const fs = require("fs");  
 
 import cloudinary from "cloudinary";
-import nodemailer from "nodemailer"; 
-
-
-
-
-
-
-
-
-
-
-
-
+import nodemailer from "nodemailer";  
 module.exports = {
 
 
@@ -48,6 +36,49 @@ module.exports = {
     });
     return token;
   },
+
+
+generateSlots: (openTime, closeTime, breakTimeStart, breakEndTime, slotDuration, ) => {
+  let slots = [];
+  let startTime = new Date(`1970-01-01T${openTime}:00Z`);
+  let endTime = new Date(`1970-01-01T${closeTime}:00Z`);
+  let breakStart = new Date(`1970-01-01T${breakTimeStart}:00Z`);
+  let breakEnd = new Date(`1970-01-01T${breakEndTime}:00Z`);
+
+  // Loop to create slots until the end time is reached
+  while (startTime < endTime) {
+    const slotEndTime = new Date(startTime.getTime() + slotDuration * 60000); // Slot duration is 30 minutes
+
+    // Skip slot creation during the break time
+    if (
+      (startTime >= breakStart && startTime < breakEnd) ||
+      (slotEndTime > breakStart && slotEndTime <= breakEnd)
+    ) {
+      startTime = new Date(breakEnd.getTime()); // Move start time to the end of the break
+      continue;
+    }
+
+    if (slotEndTime > endTime) break;
+
+    // Format the time for the slot
+    const startFormatted = startTime.toISOString().slice(11, 16); // HH:mm
+    const endFormatted = slotEndTime.toISOString().slice(11, 16); // HH:mm
+
+    slots.push({
+      date: new Date().toISOString(), // You can adjust this if you want to set specific dates
+      time: `${startFormatted} - ${endFormatted}`,
+      maxCapacity: 20, // Example capacity, you can customize this based on your needs
+      bookedCount: 0, // Default to 0 booked users
+      bookedUsers: [], // Default to no users booked
+    });
+
+    // Move the start time by the duration of the slot
+    startTime = new Date(slotEndTime.getTime());
+  }
+
+  return slots;
+},
+
 
   sendMail: async (to, subject, body) => {
     const msg = {

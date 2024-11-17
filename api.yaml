@@ -1167,11 +1167,7 @@ definitions:
       email:
         type: string
       password:
-        type: string
-      deviceToken:
-        type: string
-      deviceType:
-        type: string
+        type: string 
 
 
   buyCard:

@@ -263,59 +263,8 @@ export class userController {
      *         description: Internal server error.
      */
 
-    // async verifyOtp(req, res, next) {
-    //     const validationSchema = Joi.object({
-    //         email: Joi.string().email().required(),
-    //         OTP: Joi.string().required(),
-    //     });
-    //     try {
-    //         const {
-    //             email,
-    //             OTP
-    //         } = await validationSchema.validateAsync(req.body);
-    //         const existingUser = await findUser({
-    //             email,
-    //             status: "ACTIVE",
-    //             userType: userType.USER,
-    //         });
-    //         if (!existingUser) {
-    //             throw apiError.conflict(responseMessage.USER_NOT_FOUND);
-    //         }
-    //         if (new Date().getTime() > existingUser.otpExpTime) {
-    //             return res.json(new response({}, responseMessage.OTP_EXPIRED));
-    //         }
-    //         if (existingUser.OTP != OTP) {
-    //             return res.json(new response({}, responseMessage.INCORRECT_OTP));
-    //         }
-    //         const updateInfo = await updateUser({
-    //             _id: existingUser._id
-    //         }, {
-    //             OTPVerification: true,
-    //             token: token,
-    //         }, )
-    //         const token = await commonFunction.getToken({
-    //             _id: existingUser._id,
-    //             email: existingUser.email,
-    //             mobileNumber: existingUser.mobileNumber,
-    //             userType: existingUser.userType,
-    //         });
-    //         const userData = {
-    //             _id: existingUser._id,
-    //             firstName: existingUser.firstName,
-    //             lastName: existingUser.lastName,
-    //             email: existingUser.email,
-    //             mobileNumber: existingUser.mobileNumber,
-    //             OTPVerification: updateInfo.OTPVerification,
-    //             token: token,
-    //         }
-    //         return res.json(new response(userData, responseMessage.OTP_VERIFY));
-    //     } catch (error) {
-    //         console.error("Error in verifyOtp: ", error);
-    //         return next(error);
-    //     }
-    // }
-  async verifyOtp(req, res, next) {
-      const validationSchema = Joi.object({
+    async verifyOtp(req, res, next) {
+        const validationSchema = Joi.object({
             email: Joi.string().email().required(),
             OTP: Joi.string().required(),
         });
@@ -324,43 +273,48 @@ export class userController {
                 email,
                 OTP
             } = await validationSchema.validateAsync(req.body);
-          var userResult = await findUser({
-              email: email,
-              status: {
-                  $ne: status.DELETE
-              },
-          });
-          if (!userResult) {
-              throw apiError.notFound(responseMessage.USER_NOT_FOUND);
-          }
-          if (new Date().getTime() > userResult.otpExpTime) {
-              throw apiError.badRequest(responseMessage.OTP_EXPIRED);
-          }
-          if (userResult.OTP != OTP) {
-              throw apiError.badRequest(responseMessage.INCORRECT_OTP);
-          }
-          var updateResult = await updateUser({
-              _id: userResult._id
-          }, {
-              accountVerify: true
-          });
-          var token = await commonFunction.getToken({
-              _id: updateResult._id,
-              email: updateResult.email,
-              mobileNumber: updateResult.mobileNumber,
-              userType: updateResult.userType,
-          });
-          var obj = {
-              _id: updateResult._id,
-              email: updateResult.email,
-              token: token,
-          };
-          return res.json(new response(obj, responseMessage.OTP_VERIFY));
-      } catch (error) {
-          return next(error);
-      }
-  }
-
+            const existingUser = await findUser({
+                email,
+                status: "ACTIVE",
+                userType: userType.USER,
+            });
+            if (!existingUser) {
+                throw apiError.conflict(responseMessage.USER_NOT_FOUND);
+            }
+            if (new Date().getTime() > existingUser.otpExpTime) {
+                return res.json(new response({}, responseMessage.OTP_EXPIRED));
+            }
+            if (existingUser.OTP != OTP) {
+                return res.json(new response({}, responseMessage.INCORRECT_OTP));
+            }
+            const updateInfo = await updateUser({
+                _id: existingUser._id
+            }, {
+                OTPVerification: true,
+                token: token,
+            }, )
+            const token = await commonFunction.getToken({
+                _id: existingUser._id,
+                email: existingUser.email,
+                mobileNumber: existingUser.mobileNumber,
+                userType: existingUser.userType,
+            });
+            const userData = {
+                _id: existingUser._id,
+                firstName: existingUser.firstName,
+                lastName: existingUser.lastName,
+                email: existingUser.email,
+                mobileNumber: existingUser.mobileNumber,
+                OTPVerification: updateInfo.OTPVerification,
+                token: token,
+            }
+            return res.json(new response(userData, responseMessage.OTP_VERIFY));
+        } catch (error) {
+            console.error("Error in verifyOtp: ", error);
+            return next(error);
+        }
+    }
+ 
 
 
 }

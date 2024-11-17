@@ -1,0 +1,8 @@
+module.exports = Object.freeze({
+    HOSPITAL: 'HOSPITAL',
+    CLINIC: 'CLINIC',
+    SCHOOL: 'SCHOOL',
+    COMMUNITY_CENTER: 'COMMUNITY_CENTER',
+    SPORTS_COMPLEX: 'SPORTS_COMPLEX',
+    MOBILE_UNIT: 'MOBILE_UNIT',
+});
